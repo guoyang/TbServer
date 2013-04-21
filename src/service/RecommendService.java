@@ -1,15 +1,16 @@
 package service;
-import model.request.CategoryRecommendItemRequest;
-import model.request.ItemRecommendItemRequest;
-import model.request.ShopRecommendItemRequest;
-import model.request.ShopRecommendShopRequest;
-import model.request.UserRecommendItemRequest;
-import model.response.CategoryRecommendItemResponse;
-import model.response.ItemRecommendItemResponse;
-import model.response.ShopRecommendItemResponse;
-import model.response.ShopRecommendShopResponse;
-import model.response.UserRecommendItemResponse;
 import util.TaobaoMessageUtil;
+
+import com.taobao.api.request.CategoryrecommendItemsGetRequest;
+import com.taobao.api.request.ItemrecommendItemsGetRequest;
+import com.taobao.api.request.ShoprecommendItemsGetRequest;
+import com.taobao.api.request.ShoprecommendShopsGetRequest;
+import com.taobao.api.request.UserrecommendItemsGetRequest;
+import com.taobao.api.response.CategoryrecommendItemsGetResponse;
+import com.taobao.api.response.ItemrecommendItemsGetResponse;
+import com.taobao.api.response.ShoprecommendItemsGetResponse;
+import com.taobao.api.response.ShoprecommendShopsGetResponse;
+import com.taobao.api.response.UserrecommendItemsGetResponse;
 
 /**
  * 
@@ -24,51 +25,56 @@ public class RecommendService {
 	/**
 	 * 
 	 */
-	public static CategoryRecommendItemResponse getCategoryRecommendItems(int categoryId, int count, int recommendType, String ext) {
-		CategoryRecommendItemRequest<CategoryRecommendItemResponse> req = new CategoryRecommendItemRequest<CategoryRecommendItemResponse>();
+	public static CategoryrecommendItemsGetResponse getCategoryRecommendItems(long categoryId, long count, long recommendType, String ext) {
+//		CategoryRecommendItemRequest<CategoryRecommendItemResponse> req = new CategoryRecommendItemRequest<CategoryRecommendItemResponse>();
+		CategoryrecommendItemsGetRequest req = new CategoryrecommendItemsGetRequest();
 		req.setCount(count);
 		req.setCategoryId(categoryId);
 		req.setRecommendType(recommendType);
 		req.setExt(ext);
-		return (CategoryRecommendItemResponse) TaobaoMessageUtil.getResponse(req);
+		return (CategoryrecommendItemsGetResponse) TaobaoMessageUtil.getResponse(req);
 	}
 	
-	public static ShopRecommendItemResponse getShopRecommendItem(int sellerId, int recommendType, int count, String ext) {
-		ShopRecommendItemRequest<ShopRecommendItemResponse> req = new ShopRecommendItemRequest<ShopRecommendItemResponse>();
+	public static ShoprecommendItemsGetResponse getShopRecommendItem(long sellerId, long recommendType, long count, String ext) {
+//		ShopRecommendItemRequest<ShopRecommendItemResponse> req = new ShopRecommendItemRequest<ShopRecommendItemResponse>();
+		ShoprecommendItemsGetRequest req = new ShoprecommendItemsGetRequest();
 		req.setCount(count);
 		req.setExt(ext);
 		req.setSellerId(sellerId);
 		req.setRecommendType(recommendType);
 		
-		return (ShopRecommendItemResponse) TaobaoMessageUtil.getResponse(req);
+		return (ShoprecommendItemsGetResponse) TaobaoMessageUtil.getResponse(req);
 	}
 	
-	public static ShopRecommendShopResponse getShopRecommendShop(int sellerId, int recommendType, int count, String ext) {
-		ShopRecommendShopRequest<ShopRecommendShopResponse> req = new ShopRecommendShopRequest<ShopRecommendShopResponse>();
+	public static ShoprecommendShopsGetResponse getShopRecommendShop(long sellerId, long recommendType, long count, String ext) {
+//		ShopRecommendShopRequest<ShopRecommendShopResponse> req = new ShopRecommendShopRequest<ShopRecommendShopResponse>();
+		ShoprecommendShopsGetRequest req = new ShoprecommendShopsGetRequest();
 		req.setCount(count);
 		req.setExt(ext);
 		req.setSellerId(sellerId);
 		req.setRecommendType(recommendType);
 		
-		return (ShopRecommendShopResponse) TaobaoMessageUtil.getResponse(req);
+		return (ShoprecommendShopsGetResponse) TaobaoMessageUtil.getResponse(req);
 	}
 	
-	public static UserRecommendItemResponse getUserRecommendItem(int recommendType, int count, String ext) {
-		UserRecommendItemRequest<UserRecommendItemResponse> req = new UserRecommendItemRequest<UserRecommendItemResponse>();
+	public static UserrecommendItemsGetResponse getUserRecommendItem(long recommendType, long count, String ext) {
+//		UserRecommendItemRequest<UserRecommendItemResponse> req = new UserRecommendItemRequest<UserRecommendItemResponse>();
+		UserrecommendItemsGetRequest req = new UserrecommendItemsGetRequest();
 		req.setCount(count);
 		req.setExt(ext);
 		req.setRecommendType(recommendType);
 		
-		return (UserRecommendItemResponse) TaobaoMessageUtil.getResponse(req);
+		return (UserrecommendItemsGetResponse) TaobaoMessageUtil.getResponse(req);
 	}
 	
-	public static ItemRecommendItemResponse getItemRecommendItem(int itemId, int recommendType, int count, String ext) {
-		ItemRecommendItemRequest<ItemRecommendItemResponse> req = new ItemRecommendItemRequest<ItemRecommendItemResponse>();
+	public static ItemrecommendItemsGetResponse getItemRecommendItem(long itemId, long recommendType, long count, String ext) {
+//		ItemRecommendItemRequest<ItemRecommendItemResponse> req = new ItemRecommendItemRequest<ItemRecommendItemResponse>();
+		ItemrecommendItemsGetRequest req = new ItemrecommendItemsGetRequest();
 		req.setCount(count);
 		req.setExt(ext);
 		req.setItemId(itemId);
 		req.setRecommendType(recommendType);
 		
-		return (ItemRecommendItemResponse) TaobaoMessageUtil.getResponse(req);
+		return (ItemrecommendItemsGetResponse) TaobaoMessageUtil.getResponse(req);
 	}
 }

@@ -3,13 +3,12 @@
  */
 package logic.category;
 
-import com.taobao.api.response.ItemcatsGetResponse;
-
 import logic.LogicBase;
-import model.request.ItemscatsGetRequest;
 import parser.ProtocolParser;
-import util.NumberUtil;
 import util.TaobaoMessageUtil;
+
+import com.taobao.api.request.ItemcatsGetRequest;
+import com.taobao.api.response.ItemcatsGetResponse;
 
 /**
  * @author Administrator
@@ -23,7 +22,7 @@ public class ItemCatGetLogic implements LogicBase {
 	@Override
 	public Object logic(ProtocolParser parser) {
 		String fileds = parser.get("fields");
-		int parentId = NumberUtil.getInteger(parser.get("parent_cid"));
+		long parentCid = Long.parseLong((String)parser.get("parent_cid"));
 		String cids = parser.get("cids");
 		Number[] ids = null;
 		if(cids != null && !"".equals(cids)) {
@@ -36,12 +35,10 @@ public class ItemCatGetLogic implements LogicBase {
 			}
 		}
 		
-		ItemscatsGetRequest<ItemcatsGetResponse> req = new ItemscatsGetRequest<ItemcatsGetResponse>();
+		ItemcatsGetRequest req = new ItemcatsGetRequest();
 		req.setFields(fileds);
-		req.setParent_cid(parentId);
-		if(ids != null) {
-			req.setCids(ids);
-		}
+		req.setParentCid(parentCid);
+		req.setCids(cids);
 		ItemcatsGetResponse res = (ItemcatsGetResponse) TaobaoMessageUtil.getResponse(req);
 		
 		if (res != null) {

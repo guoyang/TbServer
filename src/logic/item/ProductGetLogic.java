@@ -3,8 +3,8 @@
  */
 package logic.item;
 
-import parser.ProtocolParser;
 import logic.AuthenLogic;
+import parser.ProtocolParser;
 
 /**
  * @author Administrator

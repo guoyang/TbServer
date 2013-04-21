@@ -3,12 +3,13 @@
  */
 package logic.recommend;
 
-import enums.ErrorMessage;
 import logic.AuthenLogic;
-import model.response.UserRecommendItemResponse;
 import parser.ProtocolParser;
 import service.RecommendService;
-import util.NumberUtil;
+
+import com.taobao.api.response.UserrecommendItemsGetResponse;
+
+import enums.ErrorMessage;
 
 /**
  * @author kakuyang
@@ -21,11 +22,11 @@ public class UserRecommendItemLogic extends AuthenLogic {
 	 */
 	@Override
 	public Object logic(ProtocolParser parser) {
-		Integer recommendType = NumberUtil.getInteger(parser.get("recommend_type"));
-		Integer count = NumberUtil.getInteger(parser.get("count"));
+		long recommendType = Long.parseLong((String)(parser.get("recommend_type")));
+		long count = Long.parseLong((String)(parser.get("count")));
 		String ext = parser.get("ext");
 		
-		UserRecommendItemResponse res = RecommendService.getUserRecommendItem(recommendType, count, ext);
+		UserrecommendItemsGetResponse res = RecommendService.getUserRecommendItem(recommendType, count, ext);
 		
 		if(res != null) {
 			if(res.getErrorCode() != ErrorMessage.ERROR_NONE.getErrorCode()) {

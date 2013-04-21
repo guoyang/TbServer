@@ -4,8 +4,9 @@
 package service;
 
 import util.TaobaoMessageUtil;
-import model.request.TaobaokeItemGetRequest;
-import model.response.TaobaokeItemGetResponse;
+
+import com.taobao.api.request.TaobaokeItemsGetRequest;
+import com.taobao.api.response.TaobaokeItemsGetResponse;
 
 /**
  * @author kakuyang
@@ -13,8 +14,10 @@ import model.response.TaobaokeItemGetResponse;
  */
 public class TaobaokeService {
 
-	public static TaobaokeItemGetResponse getTaobaokeItem(int pid, String keyword, String startPrice, String endPrice, String sort, int pageNo) {
-		TaobaokeItemGetRequest<TaobaokeItemGetResponse> req = new TaobaokeItemGetRequest<TaobaokeItemGetResponse>();
+	public static TaobaokeItemsGetResponse getTaobaokeItem(int pid, String keyword, String startPrice, String endPrice, String sort, long pageNo) {
+//		TaobaokeItemGetRequest<TaobaokeItemGetResponse> req = new TaobaokeItemGetRequest<TaobaokeItemGetResponse>();
+		TaobaokeItemsGetRequest req = new TaobaokeItemsGetRequest();
+		
 		
 		req.setFields("num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,volume ");
 		req.setKeyword(keyword);
@@ -23,12 +26,13 @@ public class TaobaokeService {
 		req.setStartPrice(startPrice);
 		req.setEndPrice(endPrice);
 		req.setSort(sort);
-		req.setPid(pid);
-		req.setPageSize(40);
+//		req.setPid(pid);
+		req.setNick("dancintherain");
+		req.setPageSize(40l);
 		req.setPageNo(pageNo);
-		//TODO 需要获取是否是手机用户
-		req.setMobile(false);
+		req.setIsMobile(true);
+//		req.setMobile(true);
 		
-		return (TaobaokeItemGetResponse) TaobaoMessageUtil.getResponse(req);
+		return (TaobaokeItemsGetResponse) TaobaoMessageUtil.getResponse(req);
 	}
 }

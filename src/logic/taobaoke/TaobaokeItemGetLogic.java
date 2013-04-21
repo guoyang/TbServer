@@ -3,12 +3,14 @@
  */
 package logic.taobaoke;
 
-import enums.ErrorMessage;
+import logic.AuthenLogic;
 import parser.ProtocolParser;
 import service.TaobaokeService;
 import util.NumberUtil;
-import logic.AuthenLogic;
-import model.response.TaobaokeItemGetResponse;
+
+import com.taobao.api.response.TaobaokeItemsGetResponse;
+
+import enums.ErrorMessage;
 
 /**
  * @author kakuyang
@@ -29,13 +31,14 @@ public class TaobaokeItemGetLogic extends AuthenLogic {
 		int pageNo = NumberUtil.getInteger(parser.get("page_no"));
 		
 		
-		TaobaokeItemGetResponse res = TaobaokeService.getTaobaokeItem(pid, keyword, startPrice, endPrice, sort, pageNo);
+		TaobaokeItemsGetResponse res = TaobaokeService.getTaobaokeItem(pid, keyword, startPrice, endPrice, sort, pageNo);
 		
 		if (res != null) {
 			if(res.getErrorCode() != ErrorMessage.ERROR_NONE.getErrorCode()) {
 				logger.error("query data from taobao error~ errorCode =" + res.getErrorCode() + ", errorMessage=" + res.getMsg());
 			}
 			System.out.println("result:" + res.getBody());
+//			new Jsonssss
 			return res.getBody();
 		} else {
 			System.out.println("taobao response is null~");
