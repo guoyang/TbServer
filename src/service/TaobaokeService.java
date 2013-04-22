@@ -6,7 +6,9 @@ package service;
 import util.TaobaoMessageUtil;
 
 import com.taobao.api.request.TaobaokeItemsGetRequest;
+import com.taobao.api.request.TaobaokeItemsRelateGetRequest;
 import com.taobao.api.response.TaobaokeItemsGetResponse;
+import com.taobao.api.response.TaobaokeItemsRelateGetResponse;
 
 /**
  * @author kakuyang
@@ -34,5 +36,21 @@ public class TaobaokeService {
 //		req.setMobile(true);
 		
 		return (TaobaokeItemsGetResponse) TaobaoMessageUtil.getResponse(req);
+	}
+	
+	public static TaobaokeItemsRelateGetResponse getTaobaokeRelate(long relateType, long numIid, long sellerId, long cid, String sort) {
+		TaobaokeItemsRelateGetRequest req = new TaobaokeItemsRelateGetRequest();
+		
+		req.setCid(cid);
+		req.setFields("num_iid,title,nick,pic_url,price,click_url,commission,ommission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,volume");
+		req.setIsMobile(true);
+		req.setRelateType(relateType);
+		req.setNumIid(numIid);
+		req.setSellerId(sellerId);
+		req.setSort(sort);
+		req.setNick("dancintherain");
+		req.setMaxCount(40l);
+		
+		return (TaobaokeItemsRelateGetResponse) TaobaoMessageUtil.getResponse(req);
 	}
 }
